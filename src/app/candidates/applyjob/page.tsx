@@ -1,14 +1,21 @@
-export default function applyFormModals() {
+"use client"
+
+import { useRouter } from "next/navigation";
+
+export default function applyJob() {
+
+    const router = useRouter();
+
     return (
-        <form className="relative flex flex-col  w-1/2 bg-white text-black justify-self-center py-20 h-screen overflow-y-auto no-scrollbar">
+        <form className="relative flex flex-col  w-1/2 bg-white text-black justify-self-center py-12 h-screen overflow-y-auto no-scrollbar">
             <div className="border border-gray-100 pb-12">
                 <div className="w-full flex flex-row h-max">
                     <div className="flex flex-row w-1/2 items-center p-10 ">
-                        <div className="border border-gray-200 shadow-sm rounded-lg p-1">
+                        <button onClick={() => router.push("/candidates")} className="border border-gray-200 shadow-sm rounded-lg p-1 hover:cursor-pointer hover:shadow-(--color-primary-hover)">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="size-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
                             </svg>
-                        </div>
+                        </button>
                         <p className="font-bold text-base px-4">Apply Front End at Rakamin</p>
                     </div>
                     <div className="flex w-1/2 items-center p-10">
@@ -33,7 +40,7 @@ export default function applyFormModals() {
                 </div>
 
             {/*  INPUT */}
-                <div className="w-full px-18 text-sm">
+                <div className="w-full px-18 pb-10 text-sm">
                     <label htmlFor="fullname">Full name<span className="text-red-500">*</span></label>
                     <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" className="bg-white border-2 border-gray-300 w-full py-2 mt-2 mb-4 px-2 rounded-lg placeholder:text-gray-950/30 focus:ring-(--color-primary-focus) focus:border-(--color-primary-main) focus:outline-none" required />
                     <label htmlFor="birthdate">Date of Birth<span className="text-red-500">*</span></label>

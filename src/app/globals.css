@@ -8,8 +8,46 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  
+  /* Primary colors */
+  --color-primary-main: #01959F;
+  --color-primary-surface: #F3FBFC;
+  --color-primary-border: #4DB5BC;
+  --color-primary-hover: #01777F;
+  --color-primary-passed: #01595F;
+  --color-primary-focus: #01959F;
+  
+  /* Secondary colors */
+  --color-secondary-main: #FBC037;
+  --color-secondary-surface: #FFFCF5;
+  --color-secondary-border: #FEEABC;
+  --color-secondary-hover: #F8A92F;
+  --color-secondary-passed: #FA9810;
+  --color-secondary-focus: #FBC037;
+  
+  /* Danger colors */
+  --color-danger-main: #E01428;
+  --color-danger-surface: #FFF9FA;
+  --color-danger-border: #F5B1B7;
+  --color-danger-hover: #BC1121;
+  --color-danger-passed: #700A14;
+  --color-danger-focus: #E01428;
+  
+  /* Warning colors */
+  --color-warning-main: #CA7336;
+  --color-warning-surface: #FCF7F3;
+  --color-warning-border: #FEB17B;
+  --color-warning-hover: #B1652F;
+  --color-warning-passed: #985628;
+  --color-warning-focus: #CA7336;
+  
+  /* Success colors */
+  --color-success-main: #43936C;
+  --color-success-surface: #F7F7F7;
+  --color-success-border: #B8DBCA;
+  --color-success-hover: #367A59;
+  --color-success-passed: #20573D;
+  --color-success-focus: #731912;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,4 +61,14 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: 'Nunito Sans', ui-sans-serif, system-ui;
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Edge */
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* for Internet Explorer and Edge */
+    scrollbar-width: none;     /* for Firefox */
+  }
 }
