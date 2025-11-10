@@ -1,7 +1,14 @@
+'use client'
+
 import SearchBar from "../components/SearchBar";
 import Image from "next/image";
+import { useState } from "react";
+import ApplyFormModals from "../components/ApplyFormModals";
+import JobListCard from "../components/JobListCard";
 
 export default function AdminPage() {
+  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
+
   return (
         <>
         <nav className="bg-white flex border-2 border-gray-200 w-full">
@@ -18,9 +25,12 @@ export default function AdminPage() {
         </nav>
 
         <main className="w-full flex">
-            <div className="flex w-3/4 bg-white">
+            <div className="flex flex-col w-3/4 bg-white">
                 <div className="w-full">
                     <SearchBar />
+                </div>
+                <div className="w-full">
+                    <JobListCard />
                 </div>
             </div>
 
@@ -41,15 +51,20 @@ export default function AdminPage() {
                     Create jobs, invite, and hire with ease
                     </p>
 
-                    <button
-                    className="bg-primary-main hover:bg-primary-hover hover:cursor-pointer text-white font-medium text-base w-full rounded-lg py-2 transition-all shadow-md hover:shadow-lg">
-                    Create a new job
+                    <button className="bg-primary-main hover:bg-primary-hover hover:cursor-pointer text-white font-medium text-base w-full rounded-lg py-2 transition-all shadow-md hover:shadow-lg" onClick={() => setIsApplyModalOpen(true)}>
+                        Create a new job
                     </button>
                 </div>
             </div>
-
-            <div></div>
         </main>
+
+        {isApplyModalOpen && (
+          <>
+            <div className="fixed inset-0 z-10 bg-black/40">
+              <ApplyFormModals onClose={() => setIsApplyModalOpen(false)} />
+            </div>
+          </>
+        )}
 
       </>
   );
