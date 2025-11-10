@@ -72,3 +72,16 @@ body {
     scrollbar-width: none;     /* for Firefox */
   }
 }
+
+.custom-dashed-line {
+  border: none;
+  border-top: 1px dashed transparent;
+  border-image: repeating-linear-gradient(
+    to right,
+    #e5e5e5 0,
+    #e5e5e5 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  border-image-slice: 1;
+}
