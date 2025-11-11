@@ -2,6 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import DatePicker from "@/app/components/DatePicker";
+import PhoneInput from "@/app/components/PhoneInput";
+import DomicileList from "@/app/components/DomicileList";
 
 export default function applyJob() {
 
@@ -50,10 +52,8 @@ export default function applyJob() {
                     <label htmlFor="female" className="ml-2 text-base">She/her (Female)</label>
                     <input type="radio" id="male" name="gender" value="male" className="ml-6 mb-4 text-base accent-(--color-primary-focus)"/>
                     <label htmlFor="male" className="ml-2 text-base">He/him (Male)</label> <br/>
-                    <label htmlFor="domicile">Domicile<span className="text-red-500">*</span></label>
-                    <input type="text" id="domicile" name="domicile" placeholder="Choose your domicile" className="bg-white border-2 border-gray-300 w-full py-2 mt-2 mb-4 px-2 rounded-lg placeholder:text-gray-950/30 focus:ring-(--color-primary-focus) focus:border-(--color-primary-main) focus:outline-none" required />
-                    <label htmlFor="phone">Phone number<span className="text-red-500">*</span></label>
-                    <input type="number" id="phone" name="phone" placeholder="8XXXX" className="bg-white border-2 border-gray-300 w-full py-2 mt-2 mb-4 px-2 rounded-lg placeholder:text-gray-950/30 focus:ring-(--color-primary-focus) focus:border-(--color-primary-main) focus:outline-none" required />
+                    <DomicileList />
+                    <PhoneInput />
                     <label htmlFor="email">Email<span className="text-red-500">*</span></label>
                     <input type="email" id="email" name="email" placeholder="Enter your email address" className="bg-white border-2 border-gray-300 w-full py-2 mt-2 mb-4 px-2 rounded-lg placeholder:text-gray-950/30 focus:ring-(--color-primary-focus) focus:border-(--color-primary-main) focus:outline-none" required />
                     <label htmlFor="linkedin">Link Linkedin<span className="text-red-500">*</span></label>
