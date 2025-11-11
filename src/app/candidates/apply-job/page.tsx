@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation";
+import DatePicker from "@/app/components/DatePicker";
 
 export default function applyJob() {
 
@@ -43,8 +44,7 @@ export default function applyJob() {
                 <div className="w-full px-18 pb-10 text-sm">
                     <label htmlFor="fullname">Full name<span className="text-red-500">*</span></label>
                     <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" className="bg-white border-2 border-gray-300 w-full py-2 mt-2 mb-4 px-2 rounded-lg placeholder:text-gray-950/30 focus:ring-(--color-primary-focus) focus:border-(--color-primary-main) focus:outline-none" required />
-                    <label htmlFor="birthdate">Date of Birth<span className="text-red-500">*</span></label>
-                    <input type="datetime" id="birthday" name="birthday" placeholder="Select date of birth" className="bg-white border-2 border-gray-300 w-full py-2 mt-2 mb-4 px-2 rounded-lg placeholder:text-gray-950/30 focus:ring-(--color-primary-focus) focus:border-(--color-primary-main) focus:outline-none" required />
+                    <DatePicker />
                     <label htmlFor="gender">Pronoun (gender)<span className="text-red-500">*</span></label> <br/>
                     <input type="radio" id="female" name="gender" value="female" className="mt-2 text-base accent-(--color-primary-focus)" />
                     <label htmlFor="female" className="ml-2 text-base">She/her (Female)</label>

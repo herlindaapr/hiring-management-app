@@ -14,10 +14,19 @@ export default function ApplyFormModals({ onClose }: { onClose: () => void }) {
             <div className="w-full px-6 text-xs h-full overflow-auto no-scrollbar py-4">
                 <label htmlFor="jobname">Job Name<span className="text-red-500">*</span></label>
                 <input type="text" id="jobname" name="jobname" placeholder="Ex. Front End Engineer" className="bg-white border-2 border-gray-300 w-full py-2 mt-2 mb-4 px-2 text-sm rounded-lg placeholder:text-gray-950/30 focus:ring-(--color-primary-focus) focus:border-(--color-primary-main) focus:outline-none" required />
+                
                 <label htmlFor="jobtype">Job Type<span className="text-red-500">*</span></label>
-                <input type="text" id="jobtype" name="jobtype" placeholder="Select job type" className="bg-white border-2 border-gray-300 w-full py-2 mt-2 mb-4 px-2 text-sm rounded-lg placeholder:text-gray-950/30 focus:ring-(--color-primary-focus) focus:border-(--color-primary-main) focus:outline-none" required />
+                    <select id="jobtype" name="jobtype" className="bg-white border-2 border-gray-300 w-full py-2 mt-2 mb-4 px-2 text-sm rounded-lg font-bold placeholder:text-gray-950/30 focus:ring-(--color-primary-focus) focus:border-(--color-primary-main) focus:outline-none" required>
+                        <option value="full-time">Full-time</option>
+                        <option value="contract">Contract</option>
+                        <option value="part-time">Part-time</option>
+                        <option value="internship">Internship</option>
+                        <option value="freelance">Freelance</option>
+                    </select>
+
                 <label htmlFor="jobdesc">Job Description<span className="text-red-500">*</span></label>
                 <input type="text-area" id="jobdesc" name="jobdesc" placeholder="Ex. " className="bg-white border-2 border-gray-300 w-full py-2 mt-2 mb-4 px-2 text-sm rounded-lg placeholder:text-gray-950/30 focus:ring-(--color-primary-focus) focus:border-(--color-primary-main) focus:outline-none" required />
+                
                 <label htmlFor="quantity">Number of Candidate Needed<span className="text-red-500">*</span></label>
                 <input type="text" id="quantity" name="quantity" placeholder="Ex. 2" className="bg-white border-2 border-gray-300 w-full py-2 mt-2 mb-4 px-2 text-sm rounded-lg placeholder:text-gray-950/30 focus:ring-(--color-primary-focus) focus:border-(--color-primary-main) focus:outline-none" required />
                 
@@ -58,7 +67,9 @@ export default function ApplyFormModals({ onClose }: { onClose: () => void }) {
                             <button className="border rounded-full py-1 px-2 bg-gray-200 text-gray-400 border-gray-300" disabled>Off</button>
                         </div>
                     </div>
+
                     <hr className="text-gray-200" />
+
                     <div className="flex px-2 border-gray-200">
                         <p className="w-2/3 text-sm text-gray-500 self-center ml-2">Photo Profile</p>
                         <div className="flex flex-row w-1/3 space-x-2 justify-end">
@@ -67,7 +78,9 @@ export default function ApplyFormModals({ onClose }: { onClose: () => void }) {
                             <button className="border rounded-full py-1 px-2 bg-gray-200 text-gray-400 border-gray-300" disabled>Off</button>
                         </div>
                     </div>
+
                     <hr className="text-gray-200" />
+
                     <div className="flex px-2 border-gray-200">
                         <p className="w-2/3 text-sm text-gray-500 self-center ml-2">Gender</p>
                         <div className="flex flex-row w-1/3 space-x-2 justify-end">
@@ -76,7 +89,9 @@ export default function ApplyFormModals({ onClose }: { onClose: () => void }) {
                             <button className="border rounded-full py-1 px-2 text-black border-gray-400 hover:cursor-pointer">Off</button>
                         </div>
                     </div>
+
                     <hr className="text-gray-200" />
+
                     <div className="flex px-2 border-gray-200">
                         <p className="w-2/3 text-sm text-gray-500 self-center ml-2">Domicile</p>
                         <div className="flex flex-row w-1/3 space-x-2 justify-end">
@@ -85,7 +100,9 @@ export default function ApplyFormModals({ onClose }: { onClose: () => void }) {
                             <button className="border rounded-full py-1 px-2 text-black border-gray-400 hover:cursor-pointer">Off</button>
                         </div>
                     </div>
+
                     <hr className="text-gray-200" />
+
                     <div className="flex px-2 border-gray-200">
                         <p className="w-2/3 text-sm text-gray-500 self-center ml-2">Email</p>
                         <div className="flex flex-row w-1/3 space-x-2 justify-end">
@@ -94,7 +111,9 @@ export default function ApplyFormModals({ onClose }: { onClose: () => void }) {
                             <button className="border rounded-full py-1 px-2 bg-gray-200 text-gray-400 border-gray-300">Off</button>
                         </div>
                     </div>
+
                     <hr className="text-gray-200" />
+
                     <div className="flex px-2 border-gray-200">
                         <p className="w-2/3 text-sm text-gray-500 self-center ml-2">Phone number</p>
                         <div className="flex flex-row w-1/3 space-x-2 justify-end">
@@ -103,7 +122,9 @@ export default function ApplyFormModals({ onClose }: { onClose: () => void }) {
                             <button className="border rounded-full py-1 px-2 text-black border-gray-400 hover:cursor-pointer">Off</button>
                         </div>
                     </div>
+
                     <hr className="text-gray-200" />
+
                     <div className="flex px-2 border-gray-200">
                         <p className="w-2/3 text-sm text-gray-500 self-center ml-2">Likedin link</p>
                         <div className="flex flex-row w-1/3 space-x-2 justify-end">
@@ -112,7 +133,9 @@ export default function ApplyFormModals({ onClose }: { onClose: () => void }) {
                             <button className="border rounded-full py-1 px-2 text-black border-gray-400 hover:cursor-pointer">Off</button>
                         </div>
                     </div>
+
                     <hr className="text-gray-200" />
+
                     <div className="flex px-2">
                         <p className="w-2/3 text-sm text-gray-500 self-center ml-2">Date of Birth</p>
                         <div className="flex flex-row w-1/3 space-x-2 justify-end">
@@ -123,6 +146,7 @@ export default function ApplyFormModals({ onClose }: { onClose: () => void }) {
                     </div>
                 </div>    
             </div> 
+            
             {/* SUBMIT BUTTON */}
             <div className="flex justify-end bg-white h-max w-full content-center justify-items-center border-t border-gray-200 py-4 hover:cursor-pointer">
                 <button type="submit" className="flex bg-primary-main text-sm py-1 px-3 mx-6 font-semibold rounded-lg justify-center self-center text-white hover:bg-primary-hover">Publish job</button>

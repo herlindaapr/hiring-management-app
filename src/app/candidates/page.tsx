@@ -54,7 +54,7 @@ export default function candidatesHome() {
                                 <p className="font-semibold pt-2">UX Designer</p>
                                 <p className="text-gray-500 text-sm">Rakamin</p>
                             </div>
-                            <button onClick={() => router.push("/candidates/applyjob")} className="flex bg-amber-400 text-black rounded-lg py-1 px-3 h-max hover:cursor-pointer">Apply</button>
+                            <button onClick={() => router.push("/candidates/apply-job")} className="flex bg-amber-400 text-black rounded-lg py-1 px-3 h-max hover:cursor-pointer">Apply</button>
                         </div>
 
                         <hr className="my-6" />

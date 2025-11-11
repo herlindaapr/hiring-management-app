@@ -1,4 +1,14 @@
+"use client"
+
+import { useRouter } from "next/navigation";
+
 export default function JobListCard() {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push("/admins/manage-job");
+  };
+
     return (
         <div className="w-full flex flex-col rounded-xl py-4 my-2 mx-6 px-4 shadow-md text-black space-y-2">
             <div className="w-full flex flex-row text-xs">
@@ -11,7 +21,7 @@ export default function JobListCard() {
             <div className="w-full flex flex-row text-gray-600">
                 <div className="flex w-1/2">Rp.7.000.000 - Rp.8.000.000</div>
                 <div className="flex w-1/2 justify-end">
-                    <button className="text-xs border py-1 px-3 rounded-lg text-white bg-primary-main">
+                    <button onClick={handleClick} className="text-xs border py-1 px-3 rounded-lg text-white bg-primary-main hover:cursor-pointer">
                         Manage Job
                     </button>
                 </div>
