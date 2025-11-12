@@ -114,7 +114,7 @@ export default function RegisterPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-focus focus:border-primary-border hover:cursor-pointer text-black"/>
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-focus focus:border-primary-border text-black"/>
                 </div>
                 <div className="mb-4">
                   <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">

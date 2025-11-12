@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Nunito_Sans } from 'next/font/google';
 import "./globals.css";
 import SessionProvider from "./components/SessionProvider";
+import { JobProvider } from "./context/JobContext";
 
 const nunito = Nunito_Sans({
   subsets: ['latin'],
@@ -25,7 +26,9 @@ export default function RootLayout({
     <html lang="en" className={nunito.variable}>
         <body>
           <SessionProvider>
-            {children}
+            <JobProvider>
+              {children}
+            </JobProvider>
           </SessionProvider>
         </body>
     </html>

@@ -37,14 +37,9 @@ export default function UserDropdown() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setShowDropdown(!showDropdown)}
-        className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+        className="flex items-center hover:opacity-80 transition-opacity"
       >
         <img src="/avatar.png" alt="avatar" className="w-10 h-10 border rounded-full" />
-        {session?.user && (
-          <span className="text-sm text-gray-700 hidden md:block">
-            {session.user.name || session.user.email}
-          </span>
-        )}
       </button>
       
       {showDropdown && (
@@ -52,11 +47,14 @@ export default function UserDropdown() {
           <div className="py-2">
             {session?.user && (
               <div className="px-4 py-2 border-b border-gray-200">
-                <p className="text-sm font-medium text-gray-900">{session.user.name || session.user.email}</p>
-                <p className="text-xs text-gray-500">{session.user.email}</p>
-                <p className="text-xs text-gray-500 mt-1">
-                  Role: <span className="font-medium capitalize">{session.user.role}</span>
+                <p className="text-xs text-gray-500">
+                  Name: <span className="font-medium capitalize">{session.user.name}</span>
                 </p>
+                {session.user.role === "admin" && (
+                  <p className="text-xs text-gray-500">
+                    Role: <span className="font-medium capitalize">{session.user.role}</span>
+                  </p>
+                )}
               </div>
             )}
             <button
