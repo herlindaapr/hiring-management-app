@@ -1,9 +1,21 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import countryCodes from "country-codes-list";
 import { Country } from "../types/index.types";
 
+export type PhoneValue = {
+  dialCode: string;
+  number: string;
+  countryCode: string;
+};
+
+type PhoneInputProps = {
+  name?: string;
+  value?: PhoneValue;
+  onChange?: (value: PhoneValue) => void;
+  required?: boolean;
+};
 
 function flagEmojiFromCountryCode(code: string) {
   if (!code) return "";
@@ -15,7 +27,7 @@ function flagEmojiFromCountryCode(code: string) {
     .join("");
 }
 
-export default function PhoneInput() {
+export default function PhoneInput({ name, value, onChange, required }: PhoneInputProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<Country>({
@@ -48,12 +60,38 @@ export default function PhoneInput() {
   const handleSelect = (country: Country) => {
     setSelected(country);
     setIsOpen(false);
+    onChange?.({
+      dialCode: country.dial_code,
+      number: phone,
+      countryCode: country.code,
+    });
   };
+
+  useEffect(() => {
+    if (!value) {
+      setSelected({
+        name: "Indonesia",
+        code: "ID",
+        dial_code: "+62",
+      });
+      setPhone("");
+      return;
+    }
+
+    if (value.countryCode) {
+      const matched = countries.find((c) => c.code === value.countryCode);
+      if (matched) {
+        setSelected(matched);
+      }
+    }
+
+    setPhone(value.number || "");
+  }, [value, countries]);
 
         return (
             <div className="relative w-full">
                 <label className="block mb-2 font-medium text-gray-700">
-                    Phone number<span className="text-red-500">*</span>
+                    Phone number{required && <span className="text-red-500">*</span>}
                 </label>
 
                 <div className="flex items-center border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-primary-focus mb-4">
@@ -67,10 +105,35 @@ export default function PhoneInput() {
                     </button>
 
                     <span className="px-2 text-gray-700 font-medium">{selected.dial_code}</span>
-
-                    <input type="phone" className="w-full py-2 px-2 rounded-r-xl outline-none placeholder-gray-400 " placeholder="81XXXXXXXXXX" value={phone} onChange={(e) => setPhone(e.target.value)}/>
+                    <input
+                      type="tel"
+                      className="w-full py-2 px-2 rounded-r-xl outline-none placeholder-gray-400 "
+                      placeholder="81XXXXXXXXXX"
+                      value={phone}
+                      onChange={(e) => {
+                        const nextValue = e.target.value;
+                        setPhone(nextValue);
+                        onChange?.({
+                          dialCode: selected.dial_code,
+                          number: nextValue,
+                          countryCode: selected.code,
+                        });
+                      }}
+                    />
                 </div>
 
+                {name && (
+                  <input
+                    type="hidden"
+                    name={name}
+                    value={
+                      phone
+                        ? `${selected.dial_code} ${phone}`.trim()
+                        : ""
+                    }
+                    required={required}
+                  />
+                )}
                 {/* Dropdown List */}
                 {isOpen && (
                 <div className="absolute z-20 mt-2 w-full bg-white border border-gray-200 rounded-xl shadow-xl">

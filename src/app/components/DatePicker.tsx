@@ -1,71 +1,100 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-export default function DatePicker() {
+type DatePickerProps = {
+  name?: string;
+  value?: string;
+  onChange?: (value: string) => void;
+  required?: boolean;
+};
+
+export default function DatePicker({ name, value, onChange, required }: DatePickerProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [currentMonth, setCurrentMonth] = useState(new Date());
 
     const days = ["S", "M", "T", "W", "T", "F", "S"];
 
-    const startOfMonth = new Date(
+    const startOfMonth = useMemo(() => new Date(
         currentMonth.getFullYear(),
         currentMonth.getMonth(),
         1
-    );
-    const endOfMonth = new Date(
+    ), [currentMonth]);
+
+    const endOfMonth = useMemo(() => new Date(
         currentMonth.getFullYear(),
         currentMonth.getMonth() + 1,
         0
-    );
+    ), [currentMonth]);
 
     const startDay = startOfMonth.getDay();
     const daysInMonth = endOfMonth.getDate();
 
     const handleDateClick = (day: number) => {
         const date = new Date(
-        currentMonth.getFullYear(),
-        currentMonth.getMonth(),
-        day
+            currentMonth.getFullYear(),
+            currentMonth.getMonth(),
+            day
         );
         setSelectedDate(date);
         setIsOpen(false);
+        onChange?.(date.toISOString());
     };
 
     const handlePrevMonth = () => {
         setCurrentMonth(
-        new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1)
+            new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1)
         );
     };
 
     const handleNextMonth = () => {
         setCurrentMonth(
-        new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1)
+            new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1)
         );
     };
 
-    const formatDate = (date: Date) => {
-        return date.toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
+    const formattedValue = useMemo(() => {
+        if (!selectedDate) {
+            return "";
+        }
+        return selectedDate.toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
         });
-    };
+    }, [selectedDate]);
+
+    useEffect(() => {
+        if (!value) {
+            setSelectedDate(null);
+            return;
+        }
+
+        const parsed = new Date(value);
+        if (!Number.isNaN(parsed.getTime())) {
+            setSelectedDate(parsed);
+            setCurrentMonth(new Date(parsed.getFullYear(), parsed.getMonth(), 1));
+        }
+    }, [value]);
 
     return (
             <div className="relative w-full mb-4">
                 <label className="block mb-2 font-medium text-gray-700">
-                    Date of birth<span className="text-red-500">*</span>
+                    Date of Birth{required && <span className="text-red-500">*</span>}
                 </label>
 
             <button type="button" onClick={() => setIsOpen(!isOpen)} className="w-full flex items-center justify-between px-4 py-2 text-gray-600 border-2 border-gray-300 rounded-lg hover:border-gray-400 focus:border-primary-main focus:outline-none">
-                <span className="text-gray-500">{selectedDate ? formatDate(selectedDate) : "Select your date of birth"}</span>
+                <span className="text-gray-500">{formattedValue || "Select your date of birth"}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
                 </svg>
 
             </button>
+
+            {name && (
+                <input type="hidden" name={name} value={selectedDate ? selectedDate.toISOString() : ""} required={required} />
+            )}
 
             {/* Calendar */}
             {isOpen && (

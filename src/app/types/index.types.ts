@@ -1,13 +1,13 @@
 export interface Province {
-    code: string;
-    name: string;
-  };
+  code: string;
+  name: string;
+}
 
 export interface Country {
-    name: string;
-    code: string;
-    dial_code: string;
-  };
+  name: string;
+  code: string;
+  dial_code: string;
+}
 
 export type Role = "admin" | "user";
 
@@ -47,9 +47,10 @@ export interface Job {
 }
 
 export interface JobContextType {
-    jobs: Job[];
-    addJob: (job: Omit<Job, "id" | "createdAt" | "updatedAt" | "status">) => void;
-    updateJob: (id: string, job: Partial<Job>) => void;
-    deleteJob: (id: string) => void;
-    getJobById: (id: string) => Job | undefined;
-  }
+  jobs: Job[];
+  addJob: (job: Omit<Job, "id" | "createdAt" | "updatedAt" | "status">) => void;
+  updateJob: (id: string, job: Partial<Job>) => void;
+  deleteJob: (id: string) => void;
+  getJobById: (id: string) => Job | undefined;
+}
+

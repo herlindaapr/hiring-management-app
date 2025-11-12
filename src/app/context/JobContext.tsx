@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { Job, JobContextType, ProfileRequirement } from "../types/index.types";
+import { Job, JobContextType, ProfileRequirement } from "@/app/types/index.types";
 
 const JobContext = createContext<JobContextType | undefined>(undefined);
 const STORAGE_KEY = "hiring-apps-jobs";

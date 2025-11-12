@@ -8,6 +8,7 @@ import JobListCard from "../components/JobListCard";
 import UserDropdown from "../components/UserDropdown";
 import { useJobs } from "../context/JobContext";
 import EmptyState from "../components/EmptyState";
+import { Job } from "../types/index.types";
 
 export default function AdminPage() {
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
@@ -39,7 +40,7 @@ export default function AdminPage() {
                 <EmptyState />
               </div>
             ) : (
-              jobs.map((job) => (
+              jobs.map((job: Job) => (
                 <JobListCard key={job.id} job={job} />
               ))
             )}
