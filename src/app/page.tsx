@@ -2,13 +2,60 @@
 
 import { FcGoogle } from "react-icons/fc";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { useState, FormEvent } from "react";
 
 export default function LoginPage() {
   const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleClick = () => {
     router.push("/register");
   };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError("");
+    setIsLoading(true);
+
+    try {
+      const result = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setError("Invalid email or password");
+        setIsLoading(false);
+        return;
+      }
+
+      if (result?.ok) {
+        // Fetch session to get user role
+        const response = await fetch("/api/auth/session");
+        const session = await response.json();
+        
+        // Redirect based on role
+        if (session?.user?.role === "admin") {
+          router.push("/admins");
+        } else if (session?.user?.role === "user") {
+          router.push("/candidates");
+        } else {
+          // Fallback to candidates if role is not set
+          router.push("/candidates");
+        }
+        router.refresh();
+      }
+    } catch (error) {
+      setError("An error occurred. Please try again.");
+      setIsLoading(false);
+    }
+  };
+
   return (
           <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 w-full">
               <div className="max-w-md w-[90%]">
@@ -26,26 +73,50 @@ export default function LoginPage() {
                       </a>
                   </p>
 
-                  <div className="mb-4">
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                        Alamat email
-                    </label>
-                    <input type="email" id="email" placeholder="email@example.com" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-focus focus:border-primary-border hover:cursor-pointer text-black"/>
-                  </div>
-                  <div className="mb-4">
-                    <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                        Kata sandi
-                    </label>
-                    <input type="password" id="password" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-focus focus:border-primary-border text-black"/>
-                  </div>
+                  {error && (
+                    <div className="mb-4 p-3 bg-danger-surface border border-danger-border text-danger-main rounded-md text-sm">
+                      {error}
+                    </div>
+                  )}
 
-                  <div className="mb-4 text-sm text-primary-main justify-self-end">
-                    <a href="#" className="self-end">Lupa kata sandi?</a>
-                  </div>
+                  <form onSubmit={handleSubmit}>
+                    <div className="mb-4">
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                          Alamat email
+                      </label>
+                      <input 
+                        type="email" 
+                        id="email" 
+                        placeholder="email@example.com" 
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-focus focus:border-primary-border hover:cursor-pointer text-black"/>
+                    </div>
+                    <div className="mb-4">
+                      <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                          Kata sandi
+                      </label>
+                      <input 
+                        type="password" 
+                        id="password" 
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-focus focus:border-primary-border text-black"/>
+                    </div>
 
-                  <button className="w-full bg-secondary-main hover:bg-secondary-hover text-gray-800 font-bold py-2 rounded-md transition-colors hover:cursor-pointer">
-                      Masuk
-                  </button>
+                    <div className="mb-4 text-sm text-primary-main justify-self-end">
+                      <a href="#" className="self-end">Lupa kata sandi?</a>
+                    </div>
+
+                    <button 
+                      type="submit"
+                      disabled={isLoading}
+                      className="w-full bg-secondary-main hover:bg-secondary-hover disabled:opacity-50 disabled:cursor-not-allowed text-gray-800 font-bold py-2 rounded-md transition-colors hover:cursor-pointer">
+                        {isLoading ? "Masuk..." : "Masuk"}
+                    </button>
+                  </form>
 
                   <div className="flex items-center my-4">
                       <div className="grow border-t border-gray-300"></div>

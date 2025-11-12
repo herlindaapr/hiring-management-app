@@ -148,8 +148,8 @@ export default function ApplyFormModals({ onClose }: { onClose: () => void }) {
             </div> 
             
             {/* SUBMIT BUTTON */}
-            <div className="flex justify-end bg-white h-max w-full content-center justify-items-center border-t border-gray-200 py-4 hover:cursor-pointer">
-                <button type="submit" className="flex bg-primary-main text-sm py-1 px-3 mx-6 font-semibold rounded-lg justify-center self-center text-white hover:bg-primary-hover">Publish job</button>
+            <div className="flex justify-end bg-white h-max w-full content-center justify-items-center border-t border-gray-200 py-4">
+                <button type="submit" className="flex bg-primary-main text-sm py-1 px-3 mx-6 font-semibold rounded-lg justify-center self-center text-white hover:bg-primary-hover hover:cursor-pointer">Publish job</button>
             </div> 
         </form>
     )

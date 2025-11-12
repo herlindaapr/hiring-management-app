@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Nunito_Sans } from 'next/font/google';
 import "./globals.css";
+import SessionProvider from "./components/SessionProvider";
 
 const nunito = Nunito_Sans({
   subsets: ['latin'],
@@ -23,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={nunito.variable}>
         <body>
-          {children}
+          <SessionProvider>
+            {children}
+          </SessionProvider>
         </body>
     </html>
   )

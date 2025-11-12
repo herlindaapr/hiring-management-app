@@ -2,12 +2,8 @@
 
 import { useState, useMemo } from "react";
 import countryCodes from "country-codes-list";
+import { Country } from "../types/index.types";
 
-type Country = {
-  name: string;
-  code: string;
-  dial_code: string;
-};
 
 function flagEmojiFromCountryCode(code: string) {
   if (!code) return "";

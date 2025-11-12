@@ -1,3 +1,7 @@
+"use client";
+
+import UserDropdown from "./UserDropdown";
+
 export default function Navbar() {
   return (
     <div className="bg-white flex drop-shadow-lg w-full">
@@ -5,7 +9,7 @@ export default function Navbar() {
             
             <div className="flex py-2 ml-auto">
                 <hr className="w-0.5 h-6 bg-gray-200 border-0 my-auto mx-4" />
-                <img src="/avatar.png" alt="avatar" className="w-10 h-10 border rounded-full" />
+                <UserDropdown />
             </div>
         </div>
     </div>

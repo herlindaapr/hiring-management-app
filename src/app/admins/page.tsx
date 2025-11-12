@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import ApplyFormModals from "../components/ApplyFormModals";
 import JobListCard from "../components/JobListCard";
+import UserDropdown from "../components/UserDropdown";
 
 export default function AdminPage() {
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
@@ -18,7 +19,7 @@ export default function AdminPage() {
                         <p className="flex text-black text-lg font-bold items-center">Job List</p>
                     </div>
                     <div className="flex w-full justify-end">
-                        <img src="/avatar.png" alt="avatar" className="w-10 h-10 border rounded-full flex" />
+                        <UserDropdown />
                     </div>
                 </div>
             </div>

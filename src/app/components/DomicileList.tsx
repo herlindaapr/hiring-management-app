@@ -1,11 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Province } from "../types/index.types";
 
-type Province = {
-  code: string;
-  name: string;
-};
 
 export default function DomicileList() {
   const [provinces, setProvinces] = useState<Province[]>([]);
