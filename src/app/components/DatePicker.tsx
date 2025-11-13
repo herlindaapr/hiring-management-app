@@ -98,17 +98,17 @@ export default function DatePicker({ name, value, onChange, required }: DatePick
 
             {/* Calendar */}
             {isOpen && (
-                <div className="absolute z-10 mt-2 w-1/2 bg-white rounded-xl border border-gray-200 shadow-md p-4">
+                <div className="absolute z-10 mt-2 w-full sm:w-96 md:w-[400px] bg-white rounded-xl border border-gray-200 shadow-md p-3 md:p-4">
                     <div className="flex justify-between items-center place-self-center mb-2">
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2 md:gap-3">
                             <button onClick={handlePrevMonth} className="text-gray-500 hover:text-gray-800 font-bold">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5 font-bold">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-4 md:size-5 font-bold">
                                     <path fillRule="evenodd" d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z" clipRule="evenodd" />
                                 </svg>
                             </button>
-                            <span className="font-semibold"> {currentMonth.toLocaleString("default", {month: "short",})}{" "}{currentMonth.getFullYear()}</span>
+                            <span className="font-semibold text-xs md:text-sm"> {currentMonth.toLocaleString("default", {month: "short",})}{" "}{currentMonth.getFullYear()}</span>
                             <button onClick={handleNextMonth} className="text-gray-500 hover:text-gray-800 font-bold">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5 font-bold">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-4 md:size-5 font-bold">
                                     <path fillRule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
                                 </svg>
                             </button>
@@ -116,13 +116,13 @@ export default function DatePicker({ name, value, onChange, required }: DatePick
                     </div>
 
                 {/* Day names */}
-                    <div className="grid grid-cols-7 text-center text-sm font-medium text-gray-500 mb-2">
+                    <div className="grid grid-cols-7 text-center text-xs md:text-sm font-medium text-gray-500 mb-2">
                         {days.map((day, index) => (
                         <div key={`${day}-${index}`}>{day}</div>
                         ))}
                     </div>
 
-                    <div className="grid grid-cols-7 text-center text-sm">
+                    <div className="grid grid-cols-7 text-center text-xs md:text-sm gap-1">
                         {Array.from({ length: startDay }).map((_, i) => (
                         <div key={`empty-${i}`} />
                         ))}
@@ -136,7 +136,7 @@ export default function DatePicker({ name, value, onChange, required }: DatePick
                             currentMonth.getFullYear() === selectedDate.getFullYear();
 
                         return (
-                            <button key={dateNum} onClick={() => handleDateClick(dateNum)} className={`w-8 h-8 mx-auto rounded-full hover:bg-primary-hover ${
+                            <button key={dateNum} onClick={() => handleDateClick(dateNum)} className={`w-7 h-7 md:w-8 md:h-8 mx-auto rounded-full hover:bg-primary-hover ${
                                 isSelected
                                 ? "bg-primary-main text-white font-bold"
                                 : "text-gray-700"

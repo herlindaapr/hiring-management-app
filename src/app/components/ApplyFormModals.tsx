@@ -114,19 +114,19 @@ export default function ApplyFormModals({ onClose }: ApplyFormModalsProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 md:p-4">
       <div className="fixed inset-0 bg-black/40" onClick={onClose}></div>
       <form 
         onSubmit={handleSubmit}
-        className="relative flex flex-col w-1/2 bg-white text-black justify-self-center my-10 h-[90vh] overflow-y-auto no-scrollbar rounded-lg z-10"
+        className="relative flex flex-col w-full max-w-2xl bg-white text-black justify-self-center my-4 md:my-10 h-[90vh] max-h-[90vh] overflow-y-auto no-scrollbar rounded-lg z-10"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="w-full flex border-b border-b-gray-200">
-          <h1 className="w-1/2 flex py-4 px-6 font-bold">Job Opening</h1>
+          <h1 className="w-1/2 flex py-3 md:py-4 px-4 md:px-6 font-bold text-sm md:text-base">Job Opening</h1>
           <div className="w-1/2 flex flex-col justify-center">
             <button 
               type="button" 
-              className="text-black self-end px-4 hover:cursor-pointer" 
+              className="text-black self-end px-3 md:px-4 hover:cursor-pointer" 
               onClick={onClose}
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5">
@@ -136,7 +136,7 @@ export default function ApplyFormModals({ onClose }: ApplyFormModalsProps) {
           </div>
         </div>
         
-        <div className="w-full px-6 text-xs h-full overflow-auto no-scrollbar py-4">
+        <div className="w-full px-4 md:px-6 text-xs h-full overflow-auto no-scrollbar py-4">
           <label htmlFor="jobname">Job Name<span className="text-red-500">*</span></label>
           <input 
             type="text" 
@@ -193,46 +193,46 @@ export default function ApplyFormModals({ onClose }: ApplyFormModalsProps) {
           <hr className="custom-dashed-line w-full py-2 mb-2" />
 
           <span className="py-2">Job Salary</span>
-          <div className="flex items-end gap-3 py-4">
-            <div className="flex-1 flex flex-col">
+          <div className="flex flex-col sm:flex-row items-end gap-3 py-4">
+            <div className="flex-1 flex flex-col w-full">
               <label className="text-xs text-gray-600 mb-2">Minimum Estimated Salary</label>
               <div className="relative">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-700 font-semibold">Rp</span>
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-700 font-semibold text-xs md:text-sm">Rp</span>
                 <input 
                   type="text" 
                   placeholder="7.000.000" 
                   value={minSalary}
                   onChange={(e) => setMinSalary(e.target.value)}
-                  className="w-full border-2 border-gray-300 rounded-md py-2 pl-10 pr-3 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition"
+                  className="w-full border-2 border-gray-300 rounded-md py-2 pl-9 md:pl-10 pr-3 text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition"
                   required
                 />
               </div>
             </div>
 
-            <span className="text-gray-400 mb-3">—</span>
+            <span className="text-gray-400 mb-3 hidden sm:block">—</span>
 
-            <div className="flex-1 flex flex-col">
+            <div className="flex-1 flex flex-col w-full">
               <label className="text-xs text-gray-600 mb-2">Maximum Estimated Salary</label>
               <div className="relative">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-700 font-semibold">Rp</span>
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-700 font-semibold text-xs md:text-sm">Rp</span>
                 <input
                   type="text"
                   placeholder="8.000.000"
                   value={maxSalary}
                   onChange={(e) => setMaxSalary(e.target.value)}
-                  className="w-full border-2 border-gray-300 rounded-md py-2 pl-10 pr-3 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition"
+                  className="w-full border-2 border-gray-300 rounded-md py-2 pl-9 md:pl-10 pr-3 text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition"
                   required
                 />
               </div>
             </div>
           </div>
 
-          <div className="flex flex-col w-full border border-gray-200 px-4 py-4 rounded-lg space-y-3">
-            <p className="flex font-bold text-sm mb-8">Minimum Profile Information Required</p>
+          <div className="flex flex-col w-full border border-gray-200 px-3 md:px-4 py-4 rounded-lg space-y-3">
+            <p className="flex font-bold text-xs md:text-sm mb-4 md:mb-8">Minimum Profile Information Required</p>
             
-            <div className="flex px-2 border-gray-200">
-              <p className="w-2/3 text-sm text-gray-500 self-center ml-2">Full Name</p>
-              <div className="flex flex-row w-1/3 space-x-2 justify-end">
+            <div className="flex flex-col sm:flex-row px-2 border-gray-200 gap-2 sm:gap-0">
+              <p className="w-full sm:w-2/3 text-xs md:text-sm text-gray-500 self-center ml-0 sm:ml-2">Full Name</p>
+              <div className="flex flex-row w-full sm:w-1/3 space-x-2 sm:justify-end">
                 <RequirementButton field="fullName" value="mandatory" label="Mandatory" />
                 <RequirementButton field="fullName" value="optional" label="Optional" />
                 <RequirementButton field="fullName" value="off" label="Off" />
@@ -241,9 +241,9 @@ export default function ApplyFormModals({ onClose }: ApplyFormModalsProps) {
 
             <hr className="text-gray-200" />
 
-            <div className="flex px-2 border-gray-200">
-              <p className="w-2/3 text-sm text-gray-500 self-center ml-2">Photo Profile</p>
-              <div className="flex flex-row w-1/3 space-x-2 justify-end">
+            <div className="flex flex-col sm:flex-row px-2 border-gray-200 gap-2 sm:gap-0">
+              <p className="w-full sm:w-2/3 text-xs md:text-sm text-gray-500 self-center ml-0 sm:ml-2">Photo Profile</p>
+              <div className="flex flex-row w-full sm:w-1/3 space-x-2 sm:justify-end">
                 <RequirementButton field="photoProfile" value="mandatory" label="Mandatory" />
                 <RequirementButton field="photoProfile" value="optional" label="Optional" />
                 <RequirementButton field="photoProfile" value="off" label="Off" />
@@ -252,9 +252,9 @@ export default function ApplyFormModals({ onClose }: ApplyFormModalsProps) {
 
             <hr className="text-gray-200" />
 
-            <div className="flex px-2 border-gray-200">
-              <p className="w-2/3 text-sm text-gray-500 self-center ml-2">Gender</p>
-              <div className="flex flex-row w-1/3 space-x-2 justify-end">
+            <div className="flex flex-col sm:flex-row px-2 border-gray-200 gap-2 sm:gap-0">
+              <p className="w-full sm:w-2/3 text-xs md:text-sm text-gray-500 self-center ml-0 sm:ml-2">Gender</p>
+              <div className="flex flex-row w-full sm:w-1/3 space-x-2 sm:justify-end">
                 <RequirementButton field="gender" value="mandatory" label="Mandatory" />
                 <RequirementButton field="gender" value="optional" label="Optional" />
                 <RequirementButton field="gender" value="off" label="Off" />
@@ -263,9 +263,9 @@ export default function ApplyFormModals({ onClose }: ApplyFormModalsProps) {
 
             <hr className="text-gray-200" />
 
-            <div className="flex px-2 border-gray-200">
-              <p className="w-2/3 text-sm text-gray-500 self-center ml-2">Domicile</p>
-              <div className="flex flex-row w-1/3 space-x-2 justify-end">
+            <div className="flex flex-col sm:flex-row px-2 border-gray-200 gap-2 sm:gap-0">
+              <p className="w-full sm:w-2/3 text-xs md:text-sm text-gray-500 self-center ml-0 sm:ml-2">Domicile</p>
+              <div className="flex flex-row w-full sm:w-1/3 space-x-2 sm:justify-end">
                 <RequirementButton field="domicile" value="mandatory" label="Mandatory" />
                 <RequirementButton field="domicile" value="optional" label="Optional" />
                 <RequirementButton field="domicile" value="off" label="Off" />
@@ -274,9 +274,9 @@ export default function ApplyFormModals({ onClose }: ApplyFormModalsProps) {
 
             <hr className="text-gray-200" />
 
-            <div className="flex px-2 border-gray-200">
-              <p className="w-2/3 text-sm text-gray-500 self-center ml-2">Email</p>
-              <div className="flex flex-row w-1/3 space-x-2 justify-end">
+            <div className="flex flex-col sm:flex-row px-2 border-gray-200 gap-2 sm:gap-0">
+              <p className="w-full sm:w-2/3 text-xs md:text-sm text-gray-500 self-center ml-0 sm:ml-2">Email</p>
+              <div className="flex flex-row w-full sm:w-1/3 space-x-2 sm:justify-end">
                 <RequirementButton field="email" value="mandatory" label="Mandatory" />
                 <RequirementButton field="email" value="optional" label="Optional" />
                 <RequirementButton field="email" value="off" label="Off" />
@@ -285,9 +285,9 @@ export default function ApplyFormModals({ onClose }: ApplyFormModalsProps) {
 
             <hr className="text-gray-200" />
 
-            <div className="flex px-2 border-gray-200">
-              <p className="w-2/3 text-sm text-gray-500 self-center ml-2">Phone number</p>
-              <div className="flex flex-row w-1/3 space-x-2 justify-end">
+            <div className="flex flex-col sm:flex-row px-2 border-gray-200 gap-2 sm:gap-0">
+              <p className="w-full sm:w-2/3 text-xs md:text-sm text-gray-500 self-center ml-0 sm:ml-2">Phone number</p>
+              <div className="flex flex-row w-full sm:w-1/3 space-x-2 sm:justify-end">
                 <RequirementButton field="phoneNumber" value="mandatory" label="Mandatory" />
                 <RequirementButton field="phoneNumber" value="optional" label="Optional" />
                 <RequirementButton field="phoneNumber" value="off" label="Off" />
@@ -296,9 +296,9 @@ export default function ApplyFormModals({ onClose }: ApplyFormModalsProps) {
 
             <hr className="text-gray-200" />
 
-            <div className="flex px-2 border-gray-200">
-              <p className="w-2/3 text-sm text-gray-500 self-center ml-2">Linkedin link</p>
-              <div className="flex flex-row w-1/3 space-x-2 justify-end">
+            <div className="flex flex-col sm:flex-row px-2 border-gray-200 gap-2 sm:gap-0">
+              <p className="w-full sm:w-2/3 text-xs md:text-sm text-gray-500 self-center ml-0 sm:ml-2">Linkedin link</p>
+              <div className="flex flex-row w-full sm:w-1/3 space-x-2 sm:justify-end">
                 <RequirementButton field="linkedinLink" value="mandatory" label="Mandatory" />
                 <RequirementButton field="linkedinLink" value="optional" label="Optional" />
                 <RequirementButton field="linkedinLink" value="off" label="Off" />
@@ -307,9 +307,9 @@ export default function ApplyFormModals({ onClose }: ApplyFormModalsProps) {
 
             <hr className="text-gray-200" />
 
-            <div className="flex px-2">
-              <p className="w-2/3 text-sm text-gray-500 self-center ml-2">Date of Birth</p>
-              <div className="flex flex-row w-1/3 space-x-2 justify-end">
+            <div className="flex flex-col sm:flex-row px-2 gap-2 sm:gap-0">
+              <p className="w-full sm:w-2/3 text-xs md:text-sm text-gray-500 self-center ml-0 sm:ml-2">Date of Birth</p>
+              <div className="flex flex-row w-full sm:w-1/3 space-x-2 sm:justify-end">
                 <RequirementButton field="dateOfBirth" value="mandatory" label="Mandatory" />
                 <RequirementButton field="dateOfBirth" value="optional" label="Optional" />
                 <RequirementButton field="dateOfBirth" value="off" label="Off" />
@@ -319,10 +319,10 @@ export default function ApplyFormModals({ onClose }: ApplyFormModalsProps) {
         </div>
         
         {/* SUBMIT BUTTON */}
-        <div className="flex justify-end bg-white h-max w-full content-center justify-items-center border-t border-gray-200 py-4">
+        <div className="flex justify-end bg-white h-max w-full content-center justify-items-center border-t border-gray-200 py-3 md:py-4">
           <button 
             type="submit" 
-            className="flex bg-primary-main text-sm py-1 px-3 mx-6 font-semibold rounded-lg justify-center self-center text-white hover:bg-primary-hover hover:cursor-pointer"
+            className="flex bg-primary-main text-xs md:text-sm py-1.5 md:py-1 px-4 md:px-3 mx-4 md:mx-6 font-semibold rounded-lg justify-center self-center text-white hover:bg-primary-hover hover:cursor-pointer"
           >
             Publish job
           </button>

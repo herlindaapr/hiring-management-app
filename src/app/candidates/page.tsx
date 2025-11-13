@@ -84,9 +84,9 @@ export default function candidatesHome() {
     <>
       <Navbar />
       <div className="flex w-full min-h-screen bg-white font-sans">
-        <main className="flex flex-row w-full max-w-8xl py-10 px-16 gap-6">
+        <main className="flex flex-col lg:flex-row w-full max-w-8xl py-4 md:py-10 px-4 md:px-16 gap-4 md:gap-6">
           {/* Left Column */}
-          <section className="flex flex-col w-2/5 h-[calc(100vh-120px)] gap-4">
+          <section className="flex flex-col w-full lg:w-2/5 h-auto lg:h-[calc(100vh-120px)] gap-4">
 
             {/* Job Card List */}
             <div className="flex-1 overflow-y-auto pr-2">
@@ -122,11 +122,11 @@ export default function candidatesHome() {
                                 className="w-12 h-12 border border-gray-200 rounded-lg"
                               />
                             </div>
-                            <div className="text-black flex flex-col items-start justify-center pr-4">
-                              <p className="text-black font-semibold text-sm md:text-base">
+                            <div className="text-black flex flex-col items-start justify-center pr-2 md:pr-4 flex-1 min-w-0">
+                              <p className="text-black font-semibold text-xs sm:text-sm md:text-base truncate w-full">
                                 {job.jobName}
                               </p>
-                              <p className="text-xs text-gray-500 pt-2">Rakamin</p>
+                              <p className="text-xs text-gray-500 pt-1 md:pt-2">Rakamin</p>
                             </div>
                           </div>
 
@@ -182,34 +182,36 @@ export default function candidatesHome() {
           </section>
 
           {/* Right Column */}
-          <section className="flex-1 flex flex-col border border-gray-100 p-6 rounded-lg">
-            <div className="w-full flex flex-row">
-              <div className="flex w-max">
-                <img
-                  src="/rakamin-logo.jpg"
-                  alt="logo rakamin"
-                  className="w-12 h-12 border border-gray-200 rounded-lg"
-                />
-              </div>
-              <div className="text-black flex flex-col justify-center w-5/6 px-4">
-                <p className="w-max flex bg-green-700 rounded-sm py-1 px-2 text-white justify-center text-xs">
-                  {formatJobType(jobType)}
-                </p>
-                <p className="font-semibold pt-2">{jobName}</p>
-                <p className="text-gray-500 text-sm">Rakamin</p>
+          <section className="flex-1 flex flex-col border border-gray-100 p-4 md:p-6 rounded-lg">
+            <div className="w-full flex flex-col sm:flex-row gap-4">
+              <div className="flex items-start gap-4 flex-1">
+                <div className="flex w-max">
+                  <img
+                    src="/rakamin-logo.jpg"
+                    alt="logo rakamin"
+                    className="w-12 h-12 border border-gray-200 rounded-lg"
+                  />
+                </div>
+                <div className="text-black flex flex-col justify-center flex-1">
+                  <p className="w-max flex bg-green-700 rounded-sm py-1 px-2 text-white justify-center text-xs">
+                    {formatJobType(jobType)}
+                  </p>
+                  <p className="font-semibold pt-2 text-sm md:text-base">{jobName}</p>
+                  <p className="text-gray-500 text-xs md:text-sm">Rakamin</p>
+                </div>
               </div>
               <button
                 onClick={handleApply}
-                className="flex bg-amber-400 text-black rounded-lg py-1 px-3 h-max hover:cursor-pointer"
+                className="flex bg-amber-400 text-black rounded-lg py-2 px-4 h-max hover:cursor-pointer text-sm md:text-base font-medium w-full sm:w-auto justify-center"
               >
                 Apply
               </button>
             </div>
 
-            <hr className="my-6" />
+            <hr className="my-4 md:my-6" />
 
             <div className="w-full">
-              <p className="text-black text-sm leading-relaxed whitespace-pre-line">
+              <p className="text-black text-xs md:text-sm leading-relaxed whitespace-pre-line">
                 {jobDescription}
               </p>
             </div>

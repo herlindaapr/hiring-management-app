@@ -153,30 +153,30 @@ function ApplyJobComponent() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="relative flex flex-col  w-1/2 bg-white text-black justify-self-center py-12 h-screen overflow-y-auto no-scrollbar">
+        <form onSubmit={handleSubmit} className="relative flex flex-col w-full max-w-2xl mx-auto bg-white text-black justify-self-center py-6 md:py-12 min-h-screen overflow-y-auto no-scrollbar">
             <div className="border border-gray-100 pb-12">
-                <div className="w-full flex flex-row h-max">
-                    <div className="flex flex-row w-1/2 items-center p-10 ">
+                <div className="w-full flex flex-col md:flex-row h-max">
+                    <div className="flex flex-row w-full md:w-1/2 items-center p-4 md:p-10">
                         <button type="button" onClick={() => router.push("/candidates")} className="border border-gray-200 shadow-sm rounded-lg p-1 hover:cursor-pointer hover:shadow-(--color-primary-hover)">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="size-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
                             </svg>
                         </button>
-                        <p className="font-bold text-base px-4">Apply {jobDetails.jobName} at Rakamin</p>
+                        <p className="font-bold text-sm md:text-base px-2 md:px-4 truncate">Apply {jobDetails.jobName} at Rakamin</p>
                     </div>
-                    <div className="flex w-1/2 items-center p-10">
-                        <p className="ml-auto font-extralight text-sm">ℹ️ This field required to fill</p>
+                    <div className="flex w-full md:w-1/2 items-center p-4 md:p-10">
+                        <p className="md:ml-auto font-extralight text-xs md:text-sm">ℹ️ This field required to fill</p>
                     </div>
                 </div>
 
-                <div className="flex w-full px-18">
+                <div className="flex w-full px-4 md:px-18">
                     <p className="text-red-600 text-xs font-bold">*Required</p>
                 </div>
 
-                <div className="px-18 py-4">
+                <div className="px-4 md:px-18 py-4">
                     <p className="text-xs font-semibold">Photo Profile</p>
-                    <img src="/avatar-male.png" alt="avatar" className="w-32 py-2" />
-                    <button className="flex flex-row border border-gray-200 shadow-sm rounded-lg py-1.5 px-4 font-extrabold">
+                    <img src="/avatar-male.png" alt="avatar" className="w-24 md:w-32 py-2" />
+                    <button type="button" className="flex flex-row border border-gray-200 shadow-sm rounded-lg py-1.5 px-4 font-extrabold">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5">
                             <path d="M9.25 13.25a.75.75 0 0 0 1.5 0V4.636l2.955 3.129a.75.75 0 0 0 1.09-1.03l-4.25-4.5a.75.75 0 0 0-1.09 0l-4.25 4.5a.75.75 0 1 0 1.09 1.03L9.25 4.636v8.614Z" />
                             <path d="M3.5 12.75a.75.75 0 0 0-1.5 0v2.5A2.75 2.75 0 0 0 4.75 18h10.5A2.75 2.75 0 0 0 18 15.25v-2.5a.75.75 0 0 0-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5Z" />
@@ -186,7 +186,7 @@ function ApplyJobComponent() {
                 </div>
 
             {/*  INPUT */}
-                <div className="w-full px-18 pb-10 text-sm">
+                <div className="w-full px-4 md:px-18 pb-10 text-sm">
                     <label htmlFor="fullname">Full name<span className="text-red-500">*</span></label>
                     <input
                         type="text"
@@ -200,26 +200,32 @@ function ApplyJobComponent() {
                     />
                     <DatePicker name="dob" value={dob} onChange={setDob} required />
                     <label htmlFor="gender">Pronoun (gender)<span className="text-red-500">*</span></label> <br/>
-                    <input
-                        type="radio"
-                        id="female"
-                        name="gender"
-                        value="female"
-                        className="mt-2 text-base accent-(--color-primary-focus)"
-                        checked={gender === "female"}
-                        onChange={(event) => setGender(event.target.value)}
-                    />
-                    <label htmlFor="female" className="ml-2 text-base">She/her (Female)</label>
-                    <input
-                        type="radio"
-                        id="male"
-                        name="gender"
-                        value="male"
-                        className="ml-6 mb-4 text-base accent-(--color-primary-focus)"
-                        checked={gender === "male"}
-                        onChange={(event) => setGender(event.target.value)}
-                    />
-                    <label htmlFor="male" className="ml-2 text-base">He/him (Male)</label> <br/>
+                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 mt-2 mb-4">
+                        <div className="flex items-center">
+                            <input
+                                type="radio"
+                                id="female"
+                                name="gender"
+                                value="female"
+                                className="text-base accent-(--color-primary-focus)"
+                                checked={gender === "female"}
+                                onChange={(event) => setGender(event.target.value)}
+                            />
+                            <label htmlFor="female" className="ml-2 text-base">She/her (Female)</label>
+                        </div>
+                        <div className="flex items-center">
+                            <input
+                                type="radio"
+                                id="male"
+                                name="gender"
+                                value="male"
+                                className="text-base accent-(--color-primary-focus)"
+                                checked={gender === "male"}
+                                onChange={(event) => setGender(event.target.value)}
+                            />
+                            <label htmlFor="male" className="ml-2 text-base">He/him (Male)</label>
+                        </div>
+                    </div>
                     <DomicileList name="domicile" value={domicile} onChange={setDomicile} required />
                     <PhoneInput name="phone" value={phone} onChange={setPhone} required />
                     <label htmlFor="email">Email<span className="text-red-500">*</span></label>
@@ -251,8 +257,8 @@ function ApplyJobComponent() {
             </div>
 
             {/* SUBMIT BUTTON */}
-            <div className="bg-white fixed bottom-0 h-max py-10 w-1/2 content-center justify-items-center border-t border-gray-200">
-                <button type="submit" className="flex w-5/6 bg-(--color-primary-main) py-2 px-8 rounded-lg justify-center self-center text-white hover:cursor-pointer hover:bg-(--color-primary-hover)">Submit</button>
+            <div className="bg-white sticky md:fixed bottom-0 h-max py-4 md:py-10 w-full max-w-2xl mx-auto content-center justify-items-center border-t border-gray-200">
+                <button type="submit" className="flex w-5/6 max-w-md mx-auto bg-(--color-primary-main) py-2 px-8 rounded-lg justify-center self-center text-white hover:cursor-pointer hover:bg-(--color-primary-hover)">Submit</button>
             </div>  
         </form>
     )

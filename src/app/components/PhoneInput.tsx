@@ -95,19 +95,19 @@ export default function PhoneInput({ name, value, onChange, required }: PhoneInp
                 </label>
 
                 <div className="flex items-center border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-primary-focus mb-4">
-                    <button type="button" onClick={() => setIsOpen(!isOpen)} className="flex items-center gap-2 px-3 py-2 border-r border-gray-300 bg-white rounded-l-xl">
-                        <span className="text-lg leading-none" aria-label={selected.name}>
+                    <button type="button" onClick={() => setIsOpen(!isOpen)} className="flex items-center gap-1 md:gap-2 px-2 md:px-3 py-2 border-r border-gray-300 bg-white rounded-l-xl">
+                        <span className="text-base md:text-lg leading-none" aria-label={selected.name}>
                             {flagEmojiFromCountryCode(selected.code)}
                         </span>
-                        <svg className={`w-4 h-4 text-gray-500 transition-transform ${ isOpen ? "rotate-180" : "" }`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                        <svg className={`w-3 h-3 md:w-4 md:h-4 text-gray-500 transition-transform ${ isOpen ? "rotate-180" : "" }`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
 
-                    <span className="px-2 text-gray-700 font-medium">{selected.dial_code}</span>
+                    <span className="px-1 md:px-2 text-gray-700 font-medium text-xs md:text-sm">{selected.dial_code}</span>
                     <input
                       type="tel"
-                      className="w-full py-2 px-2 rounded-r-xl outline-none placeholder-gray-400 "
+                      className="w-full py-2 px-2 rounded-r-xl outline-none placeholder-gray-400 text-xs md:text-sm"
                       placeholder="81XXXXXXXXXX"
                       value={phone}
                       onChange={(e) => {
@@ -136,7 +136,7 @@ export default function PhoneInput({ name, value, onChange, required }: PhoneInp
                 )}
                 {/* Dropdown List */}
                 {isOpen && (
-                <div className="absolute z-20 mt-2 w-full bg-white border border-gray-200 rounded-xl shadow-xl">
+                <div className="absolute z-20 mt-2 w-full bg-white border border-gray-200 rounded-xl shadow-xl max-h-[60vh] overflow-hidden">
                     
                     {/* Search */}
                     <div className="p-2 border-b border-gray-100">
@@ -144,21 +144,21 @@ export default function PhoneInput({ name, value, onChange, required }: PhoneInp
                             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z"/>
                             </svg>
-                            <input type="text" placeholder="Search country" className="w-full bg-transparent outline-none text-sm" value={search} onChange={(e) => setSearch(e.target.value)}/>
+                            <input type="text" placeholder="Search country" className="w-full bg-transparent outline-none text-xs md:text-sm" value={search} onChange={(e) => setSearch(e.target.value)}/>
                         </div>
                     </div>
 
                     {/* Country List */}
-                    <div className="max-h-60 overflow-y-auto">
+                    <div className="max-h-[50vh] overflow-y-auto">
                         {filtered.map((country) => (
-                            <button key={country.code} onClick={() => handleSelect(country)} className="w-full flex justify-between items-center px-4 py-2 hover:bg-gray-50 text-left transition">
-                                <div className="flex items-center gap-3">
-                                    <span className="text-lg leading-none" aria-label={country.name}>
+                            <button key={country.code} onClick={() => handleSelect(country)} className="w-full flex justify-between items-center px-3 md:px-4 py-2 hover:bg-gray-50 text-left transition">
+                                <div className="flex items-center gap-2 md:gap-3 min-w-0 flex-1">
+                                    <span className="text-base md:text-lg leading-none shrink-0" aria-label={country.name}>
                                         {flagEmojiFromCountryCode(country.code)}
                                     </span>
-                                    <span className="text-gray-800">{country.name}</span>
+                                    <span className="text-gray-800 text-xs md:text-sm truncate">{country.name}</span>
                                 </div>
-                                <span className="text-gray-500">{country.dial_code}</span>
+                                <span className="text-gray-500 text-xs md:text-sm shrink-0 ml-2">{country.dial_code}</span>
                             </button>
                         ))}
                     </div>

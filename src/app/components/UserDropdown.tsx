@@ -39,14 +39,14 @@ export default function UserDropdown() {
         onClick={() => setShowDropdown(!showDropdown)}
         className="flex items-center hover:opacity-80 transition-opacity"
       >
-        <img src="/avatar.png" alt="avatar" className="w-10 h-10 border rounded-full" />
+        <img src="/avatar.png" alt="avatar" className="w-8 h-8 md:w-10 md:h-10 border rounded-full" />
       </button>
       
       {showDropdown && (
-        <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 z-10">
+        <div className="absolute right-0 mt-2 w-40 md:w-48 bg-white rounded-md shadow-lg border border-gray-200 z-10">
           <div className="py-2">
             {session?.user && (
-              <div className="px-4 py-2 border-b border-gray-200">
+              <div className="px-3 md:px-4 py-2 border-b border-gray-200">
                 <p className="text-xs text-gray-500">
                   Name: <span className="font-medium capitalize">{session.user.name}</span>
                 </p>
@@ -59,7 +59,7 @@ export default function UserDropdown() {
             )}
             <button
               onClick={handleLogout}
-              className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+              className="w-full text-left px-3 md:px-4 py-2 text-xs md:text-sm text-gray-700 hover:bg-gray-100 transition-colors"
             >
               Logout
             </button>
