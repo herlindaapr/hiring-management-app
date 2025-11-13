@@ -12,7 +12,20 @@ import { Job } from "../types/index.types";
 
 export default function AdminPage() {
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const { jobs } = useJobs();
+
+  // Filter jobs based on search query (search in jobName and jobDescription)
+  const filteredJobs = jobs.filter((job: Job) => {
+    if (!searchQuery.trim()) {
+      return true;
+    }
+    const query = searchQuery.toLowerCase();
+    return (
+      job.jobName.toLowerCase().includes(query) ||
+      job.jobDescription.toLowerCase().includes(query)
+    );
+  });
 
   return (
     <>
@@ -32,15 +45,15 @@ export default function AdminPage() {
       <main className="w-full flex flex-col lg:flex-row">
         <div className="flex flex-col w-full lg:w-3/4 bg-white">
           <div className="w-full">
-            <SearchBar />
+            <SearchBar value={searchQuery} onChange={setSearchQuery} />
           </div>
           <div className="w-full">
-            {jobs.length === 0 ? (
+            {filteredJobs.length === 0 ? (
               <div className="flex justify-center items-center py-10">
                 <EmptyState />
               </div>
             ) : (
-              jobs.map((job: Job) => (
+              filteredJobs.map((job: Job) => (
                 <JobListCard key={job.id} job={job} />
               ))
             )}
