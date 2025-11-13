@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation";
-import { Job } from "../types/index.types";
+import { Job } from "@/app/types/index.types";
 
 interface JobListCardProps {
   job: Job;

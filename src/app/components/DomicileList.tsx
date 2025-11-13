@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Province } from "../types/index.types";
+import { Province } from "@/app/types/index.types";
 
 type DomicileListProps = {
   name?: string;

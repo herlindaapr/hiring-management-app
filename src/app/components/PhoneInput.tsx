@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react";
 import countryCodes from "country-codes-list";
-import { Country } from "../types/index.types";
+import { Country } from "@/app/types/index.types";
 
 export type PhoneValue = {
   dialCode: string;

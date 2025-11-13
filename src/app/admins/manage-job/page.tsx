@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useJobs } from "@/app/context/JobContext";
 import type { JobType } from "@/app/types/index.types";
+import { Suspense } from 'react';
 
 type Candidate = {
   name: string;
@@ -167,7 +168,7 @@ const normaliseCandidate = (candidate: any): Candidate | null => {
   };
 };
 
-export default function ManageJob() {
+function ManageJobComponent() {
   const searchParams = useSearchParams();
   const jobIdFilter = searchParams.get("id");
   const { jobs } = useJobs();
@@ -343,6 +344,14 @@ export default function ManageJob() {
           </div>
         </div>
       </main>
-    </>
+      </>
+  );
+}
+
+export default function ManageJob() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ManageJobComponent />
+    </Suspense>
   );
 }

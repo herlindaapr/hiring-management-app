@@ -7,6 +7,7 @@ import PhoneInput, { PhoneValue } from "@/app/components/PhoneInput";
 import DomicileList from "@/app/components/DomicileList";
 import { useJobs } from "@/app/context/JobContext";
 import type { Job, JobType } from "@/app/types/index.types";
+import { Suspense } from 'react';
 
 const DEFAULT_JOB: Pick<Job, "id" | "jobName" | "jobType" | "minSalary" | "maxSalary"> = {
   id: "default-job",
@@ -38,7 +39,7 @@ const formatJobTypeLabel = (type: JobType) => {
   return label.charAt(0).toUpperCase() + label.slice(1);
 };
 
-export default function applyJob() {
+function ApplyJobComponent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const { jobs } = useJobs();
@@ -255,4 +256,12 @@ export default function applyJob() {
             </div>  
         </form>
     )
+}
+
+export default function ApplyJob() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ApplyJobComponent />
+    </Suspense>
+  );
 }
