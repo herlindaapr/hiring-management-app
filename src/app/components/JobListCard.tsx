@@ -47,7 +47,7 @@ export default function JobListCard({ job }: JobListCardProps) {
           {job.status === "active" ? "Active" : "Inactive"}
         </div>
         <div className="border px-2 md:px-3 py-1 rounded border-gray-200 text-gray-500">
-          created at {formatDate(job.createdAt)}
+          started on {formatDate(job.createdAt)}
         </div>
       </div>
       <div className="w-full flex font-bold text-sm md:text-base">

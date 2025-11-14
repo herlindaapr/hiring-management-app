@@ -21,7 +21,6 @@ export default function ApplyFormModals({ onClose }: ApplyFormModalsProps) {
   const [minSalary, setMinSalary] = useState("");
   const [maxSalary, setMaxSalary] = useState("");
 
-  // Format number to IDR format (xxx.xxx.xxx)
   const formatToIDR = (value: string): string => {
     // Remove all non-digit characters
     const numeric = value.replace(/[^\d]/g, "");
@@ -95,7 +94,7 @@ export default function ApplyFormModals({ onClose }: ApplyFormModalsProps) {
       });
 
       // Show success toast
-      showToast(`Job "${jobName}" has been successfully published!`, "success");
+      showToast(`Job "${jobName}" has been successfully created!`, "success");
 
       // Close modal
       onClose();

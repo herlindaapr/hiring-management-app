@@ -250,9 +250,9 @@ function ManageJobComponent() {
         <div className="flex w-full">
           <div className="flex flex-row w-full py-2 px-2 md:px-4">
             <div className="flex w-full flex-wrap gap-2">
-              <button className="flex border border-gray-200 shadow-sm font-semibold text-black p-2 text-xs md:text-sm py-1 px-2 md:px-3 bg-white self-center rounded-lg">
+              <a href="/admins" className="flex border border-gray-200 shadow-sm font-semibold text-black p-2 text-xs md:text-sm py-1 px-2 md:px-3 bg-white self-center rounded-lg">
                 Job List
-              </button>
+              </a>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5 md:size-6 text-black self-center">
                 <path fillRule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
               </svg>
