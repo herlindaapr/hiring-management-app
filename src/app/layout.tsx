@@ -4,6 +4,8 @@ import { Nunito_Sans } from 'next/font/google';
 import "./globals.css";
 import SessionProvider from "./components/SessionProvider";
 import { JobProvider } from "./context/JobContext";
+import { ToastProvider } from "./context/ToastContext";
+import ToastContainer from "./components/ToastContainer";
 
 const nunito = Nunito_Sans({
   subsets: ['latin'],
@@ -26,9 +28,12 @@ export default function RootLayout({
     <html lang="en" className={nunito.variable}>
         <body>
           <SessionProvider>
-            <JobProvider>
-              {children}
-            </JobProvider>
+            <ToastProvider>
+              <JobProvider>
+                {children}
+                <ToastContainer />
+              </JobProvider>
+            </ToastProvider>
           </SessionProvider>
         </body>
     </html>

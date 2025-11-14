@@ -89,7 +89,7 @@ export default function candidatesHome() {
           <section className="flex flex-col w-full lg:w-2/5 h-auto lg:h-[calc(100vh-120px)] gap-4">
 
             {/* Job Card List */}
-            <div className="flex-1 overflow-y-auto pr-2">
+            <div className="flex-1 overflow-y-auto custom-scrollbar pr-2">
               {sortedJobs.length === 0 ? (
                 <div className="border border-dashed border-gray-200 rounded-lg p-4 text-center text-sm text-gray-500 bg-white">
                   Currently showing a sample role. Create a new job in the admin page to share openings with candidates.
@@ -101,15 +101,8 @@ export default function candidatesHome() {
                       job.id === selectedJob?.id ||
                       (!selectedJob && job === sortedJobs[0]);
                     return (
-                      <button
-                        key={job.id}
-                        type="button"
-                        onClick={() => setSelectedJobId(job.id)}
-                        className="text-left"
-                      >
-                        <div
-                          className={`bg-(--color-primary-surface) flex flex-col border-2 mr-4 rounded-xl transition ${
-                            isSelected
+                      <button key={job.id} type="button" onClick={() => setSelectedJobId(job.id)} className="text-left">
+                        <div className={`bg-(--color-primary-surface) flex flex-col border-2 mr-4 rounded-xl transition ${isSelected
                               ? "border-(--color-primary-main) shadow-md"
                               : "border-gray-200 hover:border-(--color-primary-border)"
                           }`}

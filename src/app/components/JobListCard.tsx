@@ -24,9 +24,16 @@ export default function JobListCard({ job }: JobListCardProps) {
     });
   };
 
-  // Format salary
   const formatSalary = (min: string, max: string) => {
-    return `Rp.${min} - Rp.${max}`;
+    // Remove all non-digit characters and format
+    const formatNumber = (value: string): string => {
+      const numeric = value.replace(/[^\d]/g, "");
+      if (!numeric) return value;
+      return Number(numeric).toLocaleString("id-ID");
+    };
+    const formattedMin = formatNumber(min);
+    const formattedMax = formatNumber(max);
+    return `Rp.${formattedMin} - Rp.${formattedMax}`;
   };
 
   return (
@@ -40,7 +47,7 @@ export default function JobListCard({ job }: JobListCardProps) {
           {job.status === "active" ? "Active" : "Inactive"}
         </div>
         <div className="border px-2 md:px-3 py-1 rounded border-gray-200 text-gray-500">
-          started on {formatDate(job.createdAt)}
+          created at {formatDate(job.createdAt)}
         </div>
       </div>
       <div className="w-full flex font-bold text-sm md:text-base">
@@ -49,10 +56,7 @@ export default function JobListCard({ job }: JobListCardProps) {
       <div className="w-full flex flex-col sm:flex-row gap-2 sm:gap-0 text-gray-600">
         <div className="flex w-full sm:w-1/2 text-xs md:text-sm">{formatSalary(job.minSalary, job.maxSalary)}</div>
         <div className="flex w-full sm:w-1/2 sm:justify-end">
-          <button 
-            onClick={handleClick} 
-            className="text-xs border py-1.5 px-3 rounded-lg text-white bg-primary-main hover:cursor-pointer w-full sm:w-auto"
-          >
+          <button onClick={handleClick} className="text-xs border py-1.5 px-3 rounded-lg text-white bg-primary-main hover:cursor-pointer hover:bg-primary-hover w-full sm:w-auto">
             Manage Job
           </button>
         </div>

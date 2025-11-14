@@ -54,3 +54,9 @@ export interface JobContextType {
   getJobById: (id: string) => Job | undefined;
 }
 
+export interface ToastItem {
+  id: number;
+  message: string;
+  type: "success" | "error" | "info";
+  leaving?: boolean;
+}

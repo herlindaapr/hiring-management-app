@@ -84,36 +84,20 @@ export default function LoginPage() {
                       <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                           Alamat email
                       </label>
-                      <input 
-                        type="email" 
-                        id="email" 
-                        placeholder="email@example.com" 
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-focus focus:border-primary-border text-black"/>
+                      <input type="email" id="email" placeholder="email@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-focus focus:border-primary-border text-black"/>
                     </div>
                     <div className="mb-4">
                       <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
                           Kata sandi
                       </label>
-                      <input 
-                        type="password" 
-                        id="password" 
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-focus focus:border-primary-border text-black"/>
+                      <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-focus focus:border-primary-border text-black"/>
                     </div>
 
                     <div className="mb-4 text-sm text-primary-main justify-self-end">
                       <a href="#" className="self-end">Lupa kata sandi?</a>
                     </div>
 
-                    <button 
-                      type="submit"
-                      disabled={isLoading}
-                      className="w-full bg-secondary-main hover:bg-secondary-hover disabled:opacity-50 disabled:cursor-not-allowed text-gray-800 font-bold py-2 rounded-md transition-colors hover:cursor-pointer">
+                    <button type="submit" disabled={isLoading} className="w-full bg-secondary-main hover:bg-secondary-hover disabled:opacity-50 disabled:cursor-not-allowed text-gray-800 font-bold py-2 rounded-md transition-colors hover:cursor-pointer">
                         {isLoading ? "Masuk..." : "Masuk"}
                     </button>
                   </form>

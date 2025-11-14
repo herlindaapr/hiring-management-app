@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from "react";
 import { useJobs, getDefaultProfileRequirements } from "../context/JobContext";
+import { useToast } from "../context/ToastContext";
 import { ProfileRequirement } from "../types/index.types";
 
 interface ApplyFormModalsProps {
@@ -10,6 +11,7 @@ interface ApplyFormModalsProps {
 
 export default function ApplyFormModals({ onClose }: ApplyFormModalsProps) {
   const { addJob } = useJobs();
+  const { showToast } = useToast();
   
   // Form state
   const [jobName, setJobName] = useState("");
@@ -18,6 +20,27 @@ export default function ApplyFormModals({ onClose }: ApplyFormModalsProps) {
   const [quantity, setQuantity] = useState("");
   const [minSalary, setMinSalary] = useState("");
   const [maxSalary, setMaxSalary] = useState("");
+
+  // Format number to IDR format (xxx.xxx.xxx)
+  const formatToIDR = (value: string): string => {
+    // Remove all non-digit characters
+    const numeric = value.replace(/[^\d]/g, "");
+    if (!numeric) return "";
+    
+    // Format with dots as thousand separators
+    return Number(numeric).toLocaleString("id-ID");
+  };
+
+  // Remove formatting and get numeric value
+  const removeFormatting = (value: string): string => {
+    return value.replace(/[^\d]/g, "");
+  };
+
+  // Handle salary input change with formatting
+  const handleSalaryChange = (value: string, setter: (value: string) => void) => {
+    const formatted = formatToIDR(value);
+    setter(formatted);
+  };
   
   // Profile requirements state
   const [profileRequirements, setProfileRequirements] = useState<Record<string, ProfileRequirement>>({
@@ -43,44 +66,52 @@ export default function ApplyFormModals({ onClose }: ApplyFormModalsProps) {
     
     // Validate required fields
     if (!jobName || !jobDescription || !quantity || !minSalary || !maxSalary) {
-      alert("Please fill in all required fields");
+      showToast("Please fill in all required fields", "error");
       return;
     }
 
-    // Convert profile requirements to the correct format
-    const requirements = {
-      fullName: profileRequirements.fullName,
-      photoProfile: profileRequirements.photoProfile,
-      gender: profileRequirements.gender,
-      domicile: profileRequirements.domicile,
-      email: profileRequirements.email,
-      phoneNumber: profileRequirements.phoneNumber,
-      linkedinLink: profileRequirements.linkedinLink,
-      dateOfBirth: profileRequirements.dateOfBirth,
-    };
+    try {
+      // Convert profile requirements to the correct format
+      const requirements = {
+        fullName: profileRequirements.fullName,
+        photoProfile: profileRequirements.photoProfile,
+        gender: profileRequirements.gender,
+        domicile: profileRequirements.domicile,
+        email: profileRequirements.email,
+        phoneNumber: profileRequirements.phoneNumber,
+        linkedinLink: profileRequirements.linkedinLink,
+        dateOfBirth: profileRequirements.dateOfBirth,
+      };
 
-    // Add job to context
-    addJob({
-      jobName,
-      jobType,
-      jobDescription,
-      quantity: parseInt(quantity, 10),
-      minSalary,
-      maxSalary,
-      profileRequirements: requirements,
-    });
+      // Add job to context (remove formatting from salaries before storing)
+      addJob({
+        jobName,
+        jobType,
+        jobDescription,
+        quantity: parseInt(quantity, 10),
+        minSalary: removeFormatting(minSalary),
+        maxSalary: removeFormatting(maxSalary),
+        profileRequirements: requirements,
+      });
 
-    // Close modal
-    onClose();
+      // Show success toast
+      showToast(`Job "${jobName}" has been successfully published!`, "success");
 
-    // Reset form
-    setJobName("");
-    setJobType("full-time");
-    setJobDescription("");
-    setQuantity("");
-    setMinSalary("");
-    setMaxSalary("");
-    setProfileRequirements(getDefaultProfileRequirements());
+      // Close modal
+      onClose();
+
+      // Reset form
+      setJobName("");
+      setJobType("full-time");
+      setJobDescription("");
+      setQuantity("");
+      setMinSalary("");
+      setMaxSalary("");
+      setProfileRequirements(getDefaultProfileRequirements());
+    } catch (error) {
+      console.error("Failed to publish job:", error);
+      showToast("Failed to publish job. Please try again.", "error");
+    }
   };
 
   const RequirementButton = ({ 
@@ -202,7 +233,7 @@ export default function ApplyFormModals({ onClose }: ApplyFormModalsProps) {
                   type="text" 
                   placeholder="7.000.000" 
                   value={minSalary}
-                  onChange={(e) => setMinSalary(e.target.value)}
+                  onChange={(e) => handleSalaryChange(e.target.value, setMinSalary)}
                   className="w-full border-2 border-gray-300 rounded-md py-2 pl-9 md:pl-10 pr-3 text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition"
                   required
                 />
@@ -219,7 +250,7 @@ export default function ApplyFormModals({ onClose }: ApplyFormModalsProps) {
                   type="text"
                   placeholder="8.000.000"
                   value={maxSalary}
-                  onChange={(e) => setMaxSalary(e.target.value)}
+                  onChange={(e) => handleSalaryChange(e.target.value, setMaxSalary)}
                   className="w-full border-2 border-gray-300 rounded-md py-2 pl-9 md:pl-10 pr-3 text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition"
                   required
                 />

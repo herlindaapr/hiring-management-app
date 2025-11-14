@@ -85,3 +85,27 @@ body {
   );
   border-image-slice: 1;
 }
+
+/* ===== Custom Scrollbar (Webkit Browsers) ===== */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;           /* scroll bar width */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #e6f5f3;  /* light teal background */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #0d9488;  /* teal (same as Tailwind teal-600) */
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #0f766e;  /* darker teal for hover */
+}
+
+/* ===== Firefox Scrollbar ===== */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #0d9488 #e6f5f3;
+}
