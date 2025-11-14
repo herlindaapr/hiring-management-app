@@ -3,18 +3,22 @@ import { createContext, useContext, useState, ReactNode } from "react";
 import { ToastItem } from "../types/index.types";
 
 
-interface ToastContextProps {
+export interface ToastContextProps {
   toasts: ToastItem[];
-  showToast: (msg: string, type?: "success" | "error" | "info") => void;
+  showToast: (msg: string, type?: "success" | "error") => void;
   removeToast: (id: number) => void;
 }
 
-const ToastContext = createContext<ToastContextProps | undefined>(undefined);
+const ToastContext = createContext<ToastContextProps>({
+  toasts: [],
+  showToast: () => {},
+  removeToast: () => {},
+});
 
 export const ToastProvider = ({ children }: { children: ReactNode }) => {
   const [toasts, setToasts] = useState<ToastItem[]>([]);
 
-  const showToast = (message: string, type: "success" | "error" | "info") => {
+  const showToast = (message: string, type: "success" | "error" = "success") => {
     const id = Date.now();
     setToasts((prev) => [...prev, { id, message, type }]);
 

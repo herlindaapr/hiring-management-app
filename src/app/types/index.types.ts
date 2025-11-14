@@ -57,6 +57,6 @@ export interface JobContextType {
 export interface ToastItem {
   id: number;
   message: string;
-  type: "success" | "error" | "info";
+  type: "success" | "error";
   leaving?: boolean;
 }

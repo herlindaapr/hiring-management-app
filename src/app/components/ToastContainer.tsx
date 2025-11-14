@@ -16,9 +16,7 @@ export default function ToastContainer() {
           <span className={`absolute left-0 top-0 h-full w-1 rounded-l-xl
               ${toast.type === "success"
                   ? "bg-success-main"
-                  : toast.type === "error"
-                  ? "bg-danger-main"
-                  : "bg-warning-main"}
+                  : "bg-danger-main"}
             `}>
             </span>
 
@@ -27,9 +25,7 @@ export default function ToastContainer() {
               ${
                 toast.type === "success"
                   ? "border-success-main text-success-main"
-                  : toast.type === "error"
-                  ? "border-danger-main text-danger-main"
-                  : "border-warning-main text-warning-main"
+                  : "border-danger-main text-danger-main"
               }
             `}
           >
