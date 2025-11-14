@@ -6,6 +6,7 @@ import DatePicker from "@/app/components/DatePicker";
 import PhoneInput, { PhoneValue } from "@/app/components/PhoneInput";
 import DomicileList from "@/app/components/DomicileList";
 import { useJobs } from "@/app/context/JobContext";
+import { useToast } from "@/app/context/ToastContext";
 import type { Job, JobType } from "@/app/types/index.types";
 import { Suspense } from 'react';
 
@@ -43,6 +44,7 @@ function ApplyJobComponent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const { jobs } = useJobs();
+    const { showToast } = useToast();
     const [fullName, setFullName] = useState("");
     const [dob, setDob] = useState<string>("");
     const [gender, setGender] = useState<string>("");
@@ -116,6 +118,7 @@ function ApplyJobComponent() {
 
         if (!fullName || !dob || !gender || !domicile || !phone.number || !email || !linkedin) {
             setError("Please complete all required fields before submitting.");
+            showToast("Please complete all required fields before submitting.", "error");
             return;
         }
 
@@ -145,10 +148,12 @@ function ApplyJobComponent() {
             }
             setError(null);
             resetForm();
-            router.push("/admins/manage-job");
+            showToast(`Your application has been successfully submitted!`, "success");
+            router.push("/candidates");
         } catch (storageError) {
             console.error("Failed to persist candidate data:", storageError);
             setError("Failed to save your application. Please try again.");
+            showToast("Failed to save your application. Please try again.", "error");
         }
     };
 
@@ -162,7 +167,7 @@ function ApplyJobComponent() {
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
                             </svg>
                         </button>
-                        <p className="font-bold text-sm md:text-base px-2 md:px-4 truncate">Apply {jobDetails.jobName} at Rakamin</p>
+                        <p className="font-bold text-sm md:text-base px-2 md:px-4">Apply {jobDetails.jobName} at Rakamin</p>
                     </div>
                     <div className="flex w-full md:w-1/2 items-center p-4 md:p-10">
                         <p className="md:ml-auto font-extralight text-xs md:text-sm">ℹ️ This field required to fill</p>
