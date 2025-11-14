@@ -94,7 +94,7 @@ export default function ApplyFormModals({ onClose }: ApplyFormModalsProps) {
       });
 
       // Show success toast
-      showToast(`Job "${jobName}" has been successfully created!`, "success");
+      showToast(`Job vacancy successfully created!`, "success");
 
       // Close modal
       onClose();

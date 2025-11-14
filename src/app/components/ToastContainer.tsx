@@ -12,13 +12,6 @@ export default function ToastContainer() {
         <div key={toast.id} className={`relative flex items-center gap-3 bg-white border border-gray-200 shadow-md rounded-xl py-3 px-4 min-w-[280px]
             ${toast.leaving ? "toast-exit" : "toast-enter"}
           `}>
-          {/* Left colored border */}
-          <span className={`absolute left-0 top-0 h-full w-1 rounded-l-xl
-              ${toast.type === "success"
-                  ? "bg-success-main"
-                  : "bg-danger-main"}
-            `}>
-            </span>
 
           {/* Checkmark icon (pure JSX) */}
           <div className={`w-6 h-6 flex items-center justify-center rounded-full border-2 text-sm
